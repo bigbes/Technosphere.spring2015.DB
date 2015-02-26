@@ -20,19 +20,19 @@ Database::Database(const char *so_path, const char *db_path) {
 		std::cout << "Error while loading dbcreate: " << dlerror() << '\n';
 		return;
 	}
-	this->put_function = (db_put_t )dlsym(this->so_handle, "db_put");
-	if (!this->put_function) {
-		std::cout << "Error while loading db_put: " << dlerror() << '\n';
+	this->insert_function = (db_insert_t )dlsym(this->so_handle, "db_insert");
+	if (!this->insert_function) {
+		std::cout << "Error while loading db_insert: " << dlerror() << '\n';
 		return;
 	}
-	this->get_function = (db_get_t )dlsym(this->so_handle, "db_get");
-	if (!this->get_function) {
-		std::cout << "Error while loading db_get: " << dlerror() << '\n';
+	this->select_function = (db_select_t )dlsym(this->so_handle, "db_select");
+	if (!this->select_function) {
+		std::cout << "Error while loading db_select: " << dlerror() << '\n';
 		return;
 	}
-	this->del_function = (db_del_t )dlsym(this->so_handle, "db_del");
-	if (!this->del_function) {
-		std::cout << "Error while loading db_del: " << dlerror() << '\n';
+	this->delete_function = (db_delete_t )dlsym(this->so_handle, "db_delete");
+	if (!this->delete_function) {
+		std::cout << "Error while loading db_delete: " << dlerror() << '\n';
 		return;
 	}
 	this->close_function = (db_adm_t )dlsym(this->so_handle, "db_close");
@@ -64,22 +64,22 @@ Database::~Database() {
 	dlclose(this->so_handle);
 }
 
-int Database::put(const std::string& key, const std::string& val) {
-	int retval = this->put_function(this->db_object, key.c_str(), key.size(), val.c_str(), val.size());
+int Database::insert(const std::string& key, const std::string& val) {
+	int retval = this->insert_function(this->db_object, key.c_str(), key.size(), val.c_str(), val.size());
 //	if (retval != 0)
 //		std::cout << "Error, while inserting \"" << key << "\" with value \"" << val << "\"\n";
 	return retval;
 }
 
-int Database::get(const std::string& key, char **val, size_t *val_size) {
-	int retval = this->get_function(this->db_object, key.c_str(), key.size(), val, val_size);
+int Database::select(const std::string& key, char **val, size_t *val_size) {
+	int retval = this->select_function(this->db_object, key.c_str(), key.size(), val, val_size);
 //	if (retval != 0)
-//		std::cout << "Error, while getting \"" << key <<  "\"\n";
+//		std::cout << "Error, while selectting \"" << key <<  "\"\n";
 	return retval;
 }
 
-int Database::del(const std::string& key) {
-	int retval = this->del_function(this->db_object, key.c_str(), key.size());
+int Database::delete(const std::string& key) {
+	int retval = this->delete_function(this->db_object, key.c_str(), key.size());
 	if (retval != 0)
 		std::cout << "Error, while deleting \"" << key << "\"\n";
 	return retval;
