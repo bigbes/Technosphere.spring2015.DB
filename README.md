@@ -2,7 +2,7 @@
 ```
 ├── Makefile
 ├── README.md
-├── gen_workloads
+├── gen_workload
 │   ├── data									 - Каталог с данными для тестовой системы
 │   │   ├── keys.txt
 │   │   └── values.txt
@@ -50,11 +50,10 @@
 
 Она состоит из двух файлов:
 
-* `test/gen_workload.py`
-* `test/runner.py`
+* `gen_workload/gen_workload.py`
+* `runner/test_speed`
 
-
-## test/gen_workload.py
+## gen_workload/gen_workload.py
 
 Первый из них отвечает за создание файлов для тестирования, а второй за запуск их на вашем хранилище.
 
@@ -87,12 +86,12 @@ ops: 10000
 
 Находясь в папке example:
 ```
-> python ../test/gen_workload.py --output workload
+> python ../gen_workload/gen_workload.py --output workload
 --------------------------------------------------------------------------------
 Workload successfully generated
 Output: /home/bigbes/src/hw1/example/workload.in
 --------------------------------------------------------------------------------
-> python ../test/gen_workload.py --output workload --config example.schema.yml
+> python ../gen_workload/gen_workload.py --output workload --config example.schema.yml
 --------------------------------------------------------------------------------
 Workload successfully generated
 Output: /home/bigbes/src/hw1/example/workload.in
