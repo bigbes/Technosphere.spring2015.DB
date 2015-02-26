@@ -4,7 +4,7 @@ int db_close(struct DB *db) {
 	return db->close(db);
 }
 
-int db_del(struct DB *db, void *key, size_t key_len) {
+int db_delete(struct DB *db, void *key, size_t key_len) {
 	struct DBT keyt = {
 		.data = key,
 		.size = key_len
@@ -12,7 +12,7 @@ int db_del(struct DB *db, void *key, size_t key_len) {
 	return db->delete(db, &keyt);
 }
 
-int db_get(struct DB *db, void *key, size_t key_len,
+int db_select(struct DB *db, void *key, size_t key_len,
 	   void **val, size_t *val_len) {
 	struct DBT keyt = {
 		.data = key,
@@ -25,7 +25,7 @@ int db_get(struct DB *db, void *key, size_t key_len,
 	return rc;
 }
 
-int db_put(struct DB *db, void *key, size_t key_len,
+int db_insert(struct DB *db, void *key, size_t key_len,
 	   void *val, size_t val_len) {
 	struct DBT keyt = {
 		.data = key,
