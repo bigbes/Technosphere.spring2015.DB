@@ -53,18 +53,23 @@ int main(int argc, char *argv[]) {
 			clock_gettime(CLOCK_MONOTONIC, &t2);
 			time += (t2.tv_sec - t1.tv_sec) * 1e9 + (t2.tv_nsec - t1.tv_nsec);
 		} else if (op[0] == std::string("get")) {
-			char *val;
-			size_t val_size;
+			char *val = NULL;
+			size_t val_size = 0;
 			clock_gettime(CLOCK_MONOTONIC, &t1);
 			retval = db->select(op[1], &val, &val_size);
 			clock_gettime(CLOCK_MONOTONIC, &t2);
 			time += (t2.tv_sec - t1.tv_sec) * 1e9 + (t2.tv_nsec - t1.tv_nsec);
 			out.write(val, val_size) << "\n";
 		} else if (op[0] == std::string("del")) {
+			char *val = NULL;
+			size_t val_size = 0;
 			clock_gettime(CLOCK_MONOTONIC, &t1);
 			retval = db->del(op[1]);
 			clock_gettime(CLOCK_MONOTONIC, &t2);
 			time += (t2.tv_sec - t1.tv_sec) * 1e9 + (t2.tv_nsec - t1.tv_nsec);
+			db->select(op[1], &val, &val_size);
+			if (!val)
+				out << "delete is ok\n";
 		} else {
 			std::cout << "bad op\n";
 		}
