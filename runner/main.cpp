@@ -34,7 +34,7 @@ int clock_gettime(int flag, struct timespec *tspec) {
 int main(int argc, char *argv[]) {
 	std::string def_so_name = "./libmydb.so";
 	std::string def_db_name = "./mydbpath";
-	std::string def_wl_name = "../workload.uni";
+	std::string def_wl_name = "../workloads/workload.uni";
 
 	if (argc > 1) def_wl_name = std::string(argv[1]);
 	if (argc > 2) def_so_name = std::string(argv[2]);
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 			out.write(val, val_size) << "\n";
 		} else if (op[0] == std::string("del")) {
 			clock_gettime(CLOCK_MONOTONIC, &t1);
-			retval = db->delete(op[1]);
+			retval = db->del(op[1]);
 			clock_gettime(CLOCK_MONOTONIC, &t2);
 			time += (t2.tv_sec - t1.tv_sec) * 1e9 + (t2.tv_nsec - t1.tv_nsec);
 		} else {
