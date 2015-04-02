@@ -1,12 +1,13 @@
-echo "Testing uniform" >> 1
-make test_uni 2>> 1
-make test_uni 2>> 1
-make test_uni 2>> 1
-echo "Testing oldest" >> 1
-make test_old 2>> 1
-make test_old 2>> 1
-make test_old 2>> 1
-echo "Testing latest" >> 1
-make test_lat 2>> 1
-make test_lat 2>> 1
-make test_lat 2>> 1
+log="test.log"
+echo "Testing uniform" > $log
+make test_uni 2>> $log
+make test_uni 2>> $log
+make test_uni 2>> $log
+echo "Testing oldest" >> $log
+make test_old 2>> $log
+make test_old 2>> $log
+make test_old 2>> $log
+echo "Testing latest" >> $log
+make test_lat 2>> $log
+make test_lat 2>> $log
+make test_lat 2>> $log

@@ -7,17 +7,17 @@ all:
 
 test_uni:
 	rm -rf ./mydbpath
-	./test_speed ../workload.uni
+	./test_speed ../workloads/workload.uni
 #	diff ../workload.uni.out ../workload.uni.out.yours >> diffs
 
 test_old:
 	rm -rf ./mydbpath
-	./test_speed ../workload.old
+	./test_speed ../workloads/workload.old
 #	diff ../workload.old.out ../workload.old.out.yours >> diffs
 
 test_lat:
 	rm -rf ./mydbpath
-	./test_speed ../workload.lat
+	./test_speed ../woakloads/workload.lat
 #	diff ../workload.lat.out ../workload.lat.out.yours >> diffs
 
 test_all:
