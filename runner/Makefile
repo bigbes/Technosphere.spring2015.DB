@@ -17,7 +17,7 @@ test_old:
 
 test_lat:
 	rm -rf ./mydbpath
-	./test_speed ../woakloads/workload.lat
+	./test_speed ../workloads/workload.lat
 #	diff ../workload.lat.out ../workload.lat.out.yours >> diffs
 
 test_all:
